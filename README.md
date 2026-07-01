@@ -1,4 +1,4 @@
-# ArchitectUI Vue 3 Admin Dashboard v2.2.1
+# ArchitectUI Vue 3 Admin Dashboard v2.2.2
 
 ![ArchitectUI Vue 3 Preview](architectui-vue-free-preview.png)
 
@@ -8,26 +8,26 @@
 
 ## 🚀 **Vue 3 Modernization Complete**
 
-**Last Updated**: May 22, 2026
+**Last Updated**: July 1, 2026
 
 This template has been **completely modernized** and enhanced with significant improvements:
 
-### **Latest Enhancements (May 2026)**
+### **Latest Enhancements (July 2026)**
 
-- **Security Patch**: Resolved Dependabot alert by upgrading `js-cookie` to `3.0.7` (high-severity prototype-hijack advisory) via `@vue/test-utils` bump
-- **Dependencies Refreshed**: Bootstrap-Vue-Next 0.45, lint-staged 17, Vue 3.5.34, Vue Router 5.0.7, Vite 8.0.14, Vitest 4.1.7, TypeScript 6.0.3, ESLint 10.4, sass 1.100, and more
+- **Security Patch**: Resolved **9 Dependabot alerts** across `vite`, `undici`, `launch-editor`, and `@babel/core` (all dev-only / transitive — none ship in the production bundle). `vite → 8.1.2`, `undici → 7.28.0`, `@babel/core → 7.29.7`
+- **Dependencies Refreshed**: Vite 8.1.2, Vue 3.5.39, Vue Router 5.1.0, Bootstrap-Vue-Next 0.45.7, FontAwesome 7.3, Vitest 4.1.9, @types/node 26, ESLint 10.6, Prettier 3.9, sass 1.101, and more
 - **Zero Vulnerabilities**: Clean `npm audit`
 
 ### **Core Modernization Features**
 
 - ✅ **Zero vulnerabilities** - all dependencies at latest secure versions
-- ✅ **Vue 3.5.34** with latest features and optimizations
-- ✅ **Modern build system** with Vite 8
+- ✅ **Vue 3.5.39** with latest features and optimizations
+- ✅ **Modern build system** with Vite 8.1
 - ✅ **Vue 3 Composition API** throughout key components
 - ✅ **Pinia 3.x** for state management
 - ✅ **Bootstrap 5.3** integration with BootstrapVueNext 0.45
 - ✅ **Chart.js 4.x** with modern API usage
-- ✅ **FontAwesome 7.2** with tree-shaking optimization
+- ✅ **FontAwesome 7.3** with tree-shaking optimization
 - ✅ **TypeScript 6** with paths-based module resolution
 - ✅ **Vitest 4** for modern testing
 - ✅ **Professional styling** with original design integrity maintained
@@ -70,18 +70,18 @@ This template has been **completely modernized** and enhanced with significant i
 
 | Technology       | Version | Purpose             |
 | ---------------- | ------- | ------------------- |
-| Vue.js           | 3.5.34  | Frontend framework  |
-| Vue Router       | 5.0.7   | Client-side routing |
+| Vue.js           | 3.5.39  | Frontend framework  |
+| Vue Router       | 5.1.0   | Client-side routing |
 | Pinia            | 3.0.4   | State management    |
-| Vite             | 8.0.14  | Build tool          |
+| Vite             | 8.1.2   | Build tool          |
 | Bootstrap        | 5.3.8   | CSS framework       |
-| BootstrapVueNext | 0.45.4  | Vue 3 components    |
+| BootstrapVueNext | 0.45.7  | Vue 3 components    |
 | Chart.js         | 4.5.1   | Data visualization  |
-| FontAwesome      | 7.2.0   | Icons               |
+| FontAwesome      | 7.3.0   | Icons               |
 | TypeScript       | 6.0.3   | Type safety         |
-| Vitest           | 4.1.7   | Testing framework   |
+| Vitest           | 4.1.9   | Testing framework   |
 | jsdom            | 29.1.1  | DOM simulation      |
-| ESLint           | 10.4.0  | Code quality        |
+| ESLint           | 10.6.0  | Code quality        |
 
 ## 🚀 **Getting Started**
 

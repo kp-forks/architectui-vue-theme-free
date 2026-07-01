@@ -9,17 +9,28 @@ ArchitectUI Vue Free - a Vue 3 admin dashboard template built with Bootstrap 5 a
 ## Development Commands
 
 ```bash
-npm run serve          # Start dev server (http://localhost:8087)
-npm run build          # Production build (runs type-check first)
+npm run serve          # Start dev server (http://localhost:8087) — alias for `npm run dev`, both run vite
+npm run build          # Production build: vue-tsc --noEmit (type-check) THEN vite build
 npm run preview        # Preview production build
 npm run lint           # Run ESLint with auto-fix
 npm run format         # Format code with Prettier
 npm run format:check   # Check formatting without changes
-npm run type-check     # Run TypeScript type checking
+npm run type-check     # Run TypeScript type checking (vue-tsc --noEmit)
 npm run test           # Run tests in watch mode
 npm run test:run       # Run tests once
-npm run test:coverage  # Run tests with coverage report
+npm run test:ui        # Vitest browser UI
+npm run test:coverage  # Run tests with coverage report (v8 provider)
+
+# Run a single test file or by name
+npx vitest run tests/utils/helpers.test.ts
+npx vitest run -t "partial test name"
 ```
+
+A **husky pre-commit hook** runs `lint-staged` (Prettier + ESLint on staged files), so commits auto-format/lint. `npm run prepare` installs the hook.
+
+## Language: JavaScript app code, TypeScript tooling
+
+Despite the full TS toolchain (vue-tsc, `type-check`, tsconfig), the **application source is plain JavaScript** — `main.js`, all stores (`*.js`), `router/index.js`, and `<script>` blocks in `.vue` files. The only `.ts`/`.d.ts` files are `src/types/*.d.ts`, tests, and config. Match the surrounding style: add new stores/router entries as `.js`, not `.ts`. Components mix Composition API and Options API (e.g. [App.vue](src/App.vue) uses Options API).
 
 ## Architecture
 
@@ -40,7 +51,7 @@ Routes without `meta.layout` default to `default-layout`. Example:
 { path: '/pages/login-boxed', meta: { layout: 'userpages' }, component: ... }
 ```
 
-The layout switching happens in [App.vue](src/App.vue) via a computed property that resolves `layout + '-layout'`.
+The layout switching happens in [App.vue](src/App.vue): a computed property appends `-layout` to `route.meta.layout` (defaulting to `default`), so `meta.layout: 'userpages'` resolves to the `<userpages-layout>` component. Both layout wrappers are **registered globally in [main.js](src/main.js)** (`app.component('default-layout', ...)`); a new layout must be registered there before any route's `meta.layout` can reference it.
 
 ### State Management (Pinia)
 
@@ -52,6 +63,7 @@ Stores in `/src/stores/`:
 - **`sidebar.js`** - Sidebar-specific state
 
 Usage:
+
 ```javascript
 import { useDashboardStore } from '@/stores/dashboard'
 import { useUIStore } from '@/stores/ui'
@@ -70,13 +82,15 @@ uiStore.setTheme('dark')
 
 ### Component Registration
 
-BootstrapVueNext components are registered globally in [main.js](src/main.js) with kebab-case names (e.g., `<b-button>`, `<b-modal>`). FontAwesome icons use `<font-awesome-icon>` with icons registered in the library.
+BootstrapVueNext components are imported and registered **individually** in [main.js](src/main.js) with kebab-case names (e.g., `<b-button>`, `<b-modal>`) — the full plugin is not installed. **To use a `<b-*>` component not already in the list, import it and add an `app.component(...)` line in main.js**, otherwise it silently renders as an unknown element.
+
+FontAwesome is likewise tree-shaken: each icon must be **both imported and passed to `library.add(...)`** in main.js before `<font-awesome-icon :icon="['fas', 'icon-name']" />` will resolve it.
 
 ### Build Configuration
 
 - **Vite config**: [vite.config.ts](vite.config.ts) - Includes manual chunk splitting for vendor, bootstrap, charts, and icons
 - **Vitest config**: [vitest.config.ts](vitest.config.ts) - Test setup with jsdom environment
-- **Production base path**: `/architectui-vue-free/` (for GitHub Pages deployment)
+- **Production base path**: `/architectui-vue-free/` — set in **both** [vite.config.ts](vite.config.ts) `base` and the router's `createWebHistory` ([src/router/index.js](src/router/index.js)), applied only when `NODE_ENV === 'production'` / `import.meta.env.PROD`. Keep the two in sync (GitHub Pages deployment).
 
 ### Key Directories
 
@@ -87,10 +101,10 @@ BootstrapVueNext components are registered globally in [main.js](src/main.js) wi
 
 ### Icons
 
-Two icon systems are used:
+Two icon systems coexist:
 
-- **FontAwesome** - Via `<font-awesome-icon :icon="['fas', 'icon-name']" />`. Icons must be imported and added to library in main.js
-- **Pe7-icon** - CSS class-based icons (e.g., `pe-7s-rocket`)
+- **FontAwesome** - `<font-awesome-icon :icon="['fas', 'icon-name']" />` (import + `library.add` required — see Component Registration)
+- **Pe7-icon** - CSS class-based, no registration (e.g., `<i class="pe-7s-rocket"></i>`)
 
 ### Styling
 

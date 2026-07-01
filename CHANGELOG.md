@@ -5,6 +5,66 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.2] - 2026-07-01 - **Security Patch & Dependency Refresh**
+
+### 🔒 **Security**
+
+Resolved **9 Dependabot alerts** (all in dev-only / transitive dependencies — none ship in the production bundle):
+
+| Advisory                                                                 | Severity | Package        | Fix                                          |
+| ------------------------------------------------------------------------ | -------- | -------------- | -------------------------------------------- |
+| [GHSA-fx2h-pf6j-xcff](https://github.com/advisories/GHSA-fx2h-pf6j-xcff) | High     | `vite`         | `server.fs.deny` bypass on Windows alt paths |
+| [GHSA-v6wh-96g9-6wx3](https://github.com/advisories/GHSA-v6wh-96g9-6wx3) | Moderate | `launch-editor`| NTLMv2 hash disclosure via UNC path (Windows)|
+| [GHSA-vmh5-mc38-953g](https://github.com/advisories/GHSA-vmh5-mc38-953g) | High     | `undici`       | TLS cert validation bypass (SOCKS5 ProxyAgent) |
+| [GHSA-hm92-r4w5-c3mj](https://github.com/advisories/GHSA-hm92-r4w5-c3mj) | High     | `undici`       | Cross-origin request routing (SOCKS5 pool reuse) |
+| [GHSA-pr7r-676h-xcf6](https://github.com/advisories/GHSA-pr7r-676h-xcf6) | Moderate | `undici`       | Cross-user disclosure (shared-cache whitespace) |
+| [GHSA-p88m-4jfj-68fv](https://github.com/advisories/GHSA-p88m-4jfj-68fv) | Moderate | `undici`       | HTTP header injection (Set-Cookie percent-decoding) |
+| [GHSA-g8m3-5g58-fq7m](https://github.com/advisories/GHSA-g8m3-5g58-fq7m) | Low      | `undici`       | Set-Cookie SameSite downgrade (substring match) |
+| [GHSA-35p6-xmwp-9g52](https://github.com/advisories/GHSA-35p6-xmwp-9g52) | Low      | `undici`       | HTTP response queue poisoning (keep-alive reuse) |
+| [GHSA-4x5r-pxfx-6jf8](https://github.com/advisories/GHSA-4x5r-pxfx-6jf8) | Low      | `@babel/core`  | Arbitrary file read via `sourceMappingURL` comment |
+
+- **`vite` → 8.1.2** clears the `fs.deny` bypass and drops the vulnerable `launch-editor` dependency from the tree entirely.
+- **`undici` → 7.28.0** (transitive via `jsdom`) clears all six SOCKS5 / Set-Cookie / cache advisories (vulnerable range was `7.0.0 – 7.27.2`).
+- **`@babel/core` → 7.29.7** (transitive via `@vitejs/plugin-vue-jsx`) clears the `sourceMappingURL` file-read advisory.
+- **`npm audit`**: 3 vulnerabilities (2 high, 1 low) → **0 vulnerabilities**.
+
+### ✅ **Updated - Dependencies**
+
+| Package                          | Previous | Current |
+| -------------------------------- | -------- | ------- |
+| vite                             | 8.0.14   | 8.1.2   |
+| vue                              | 3.5.34   | 3.5.39  |
+| vue-router                       | 5.0.7    | 5.1.0   |
+| bootstrap-vue-next               | 0.45.4   | 0.45.7  |
+| @fortawesome/fontawesome-svg-core| 7.2.0    | 7.3.0   |
+| @fortawesome/free-solid-svg-icons| 7.2.0    | 7.3.0   |
+| @fortawesome/free-brands-svg-icons| 7.2.0   | 7.3.0   |
+| @fortawesome/vue-fontawesome     | 3.2.0    | 3.3.0   |
+| @googlemaps/js-api-loader        | 2.0.2    | 2.1.1   |
+| @types/node                      | 25.9.1   | 26.0.1  |
+| @typescript-eslint/eslint-plugin | 8.59.4   | 8.62.1  |
+| @typescript-eslint/parser        | 8.59.4   | 8.62.1  |
+| @vitejs/plugin-vue-jsx           | 5.1.5    | 5.1.6   |
+| vitest                           | 4.1.7    | 4.1.9   |
+| @vitest/ui                       | 4.1.7    | 4.1.9   |
+| @vue/test-utils                  | 2.4.10   | 2.4.11  |
+| vue-tsc                          | 3.3.1    | 3.3.6   |
+| eslint                           | 10.4.0   | 10.6.0  |
+| eslint-plugin-vue                | 10.9.1   | 10.9.2  |
+| prettier                         | 3.8.3    | 3.9.4   |
+| lint-staged                      | 17.0.5   | 17.0.8  |
+| sass                             | 1.100.0  | 1.101.0 |
+| postcss                          | 8.5.15   | 8.5.16  |
+| autoprefixer                     | 10.5.0   | 10.5.2  |
+
+### ✅ **Verification**
+
+- `npm run type-check` — clean
+- `npm run build` — succeeds, all chunks generated
+- `npm run test:run` — 8/8 tests passing
+- `npm run lint` — clean
+- `npm audit` — 0 vulnerabilities
+
 ## [2.2.1] - 2026-05-22 - **Security Patch & Dependency Refresh**
 
 ### 🔒 **Security**
