@@ -1,6 +1,6 @@
 # ArchitectUI Vue 3 Admin Dashboard v2.2.2
 
-![ArchitectUI Vue 3 Preview](architectui-vue-free-preview.png)
+![ArchitectUI Vue 3 Preview](architectui-vue-free-preview.webp)
 
 **Live Demo**: [https://demo.dashboardpack.com/architectui-vue-free/](https://demo.dashboardpack.com/architectui-vue-free/)
 
