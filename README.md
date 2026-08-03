@@ -1,4 +1,4 @@
-# ArchitectUI Vue 3 Admin Dashboard v2.2.2
+# ArchitectUI Vue 3 Admin Dashboard v2.3.0
 
 ![ArchitectUI Vue 3 Preview](architectui-vue-free-preview.webp)
 
@@ -8,23 +8,30 @@
 
 ## 🚀 **Vue 3 Modernization Complete**
 
-**Last Updated**: July 1, 2026
+**Last Updated**: August 3, 2026
 
 This template has been **completely modernized** and enhanced with significant improvements:
 
-### **Latest Enhancements (July 2026)**
+### **Latest Enhancements (August 2026)**
 
-- **Security Patch**: Resolved **9 Dependabot alerts** across `vite`, `undici`, `launch-editor`, and `@babel/core` (all dev-only / transitive — none ship in the production bundle). `vite → 8.1.2`, `undici → 7.28.0`, `@babel/core → 7.29.7`
-- **Dependencies Refreshed**: Vite 8.1.2, Vue 3.5.39, Vue Router 5.1.0, Bootstrap-Vue-Next 0.45.7, FontAwesome 7.3, Vitest 4.1.9, @types/node 26, ESLint 10.6, Prettier 3.9, sass 1.101, and more
-- **Zero Vulnerabilities**: Clean `npm audit`
+- **Security Patch**: Resolved **3 high-severity advisories** — the Dependabot-flagged **PostCSS path traversal** ([GHSA-r28c-9q8g-f849](https://github.com/advisories/GHSA-r28c-9q8g-f849), `postcss → 8.5.25`) plus `brace-expansion` and `immutable` DoS issues. All dev-only / transitive — none ship in the production bundle
+- **Pinia 3 → 4**: Major state-management upgrade; the template's `createPinia` / `defineStore` / plugin usage is unchanged in v4
+- **Dependencies Refreshed**: Vite 8.2.0, Vue 3.5.40, Vue Router 5.2.0, Bootstrap-Vue-Next 0.45.9, FontAwesome 7.3.1, Vitest 4.1.10, jsdom 30, @types/node 26.1, ESLint 10.8, Prettier 3.9.6, sass 1.102, vue-tsc 3.3.9
+- **TypeScript held at 6.0.3**: TS 7 (the native rewrite) removes the `./lib/tsc` export that `vue-tsc` depends on — verified to break `type-check`. Revisit when `vue-tsc` adds TS 7 support
+- **Requires Node.js 22+**
+- **Zero Vulnerabilities**: Clean `npm audit`; type-check, build and all 8 unit tests passing
+
+### **Previous Release (July 2026)**
+
+- **Security Patch**: Resolved **9 Dependabot alerts** across `vite`, `undici`, `launch-editor`, and `@babel/core`
 
 ### **Core Modernization Features**
 
 - ✅ **Zero vulnerabilities** - all dependencies at latest secure versions
-- ✅ **Vue 3.5.39** with latest features and optimizations
-- ✅ **Modern build system** with Vite 8.1
+- ✅ **Vue 3.5.40** with latest features and optimizations
+- ✅ **Modern build system** with Vite 8.2
 - ✅ **Vue 3 Composition API** throughout key components
-- ✅ **Pinia 3.x** for state management
+- ✅ **Pinia 4.x** for state management
 - ✅ **Bootstrap 5.3** integration with BootstrapVueNext 0.45
 - ✅ **Chart.js 4.x** with modern API usage
 - ✅ **FontAwesome 7.3** with tree-shaking optimization
@@ -70,24 +77,24 @@ This template has been **completely modernized** and enhanced with significant i
 
 | Technology       | Version | Purpose             |
 | ---------------- | ------- | ------------------- |
-| Vue.js           | 3.5.39  | Frontend framework  |
-| Vue Router       | 5.1.0   | Client-side routing |
-| Pinia            | 3.0.4   | State management    |
-| Vite             | 8.1.2   | Build tool          |
+| Vue.js           | 3.5.40  | Frontend framework  |
+| Vue Router       | 5.2.0   | Client-side routing |
+| Pinia            | 4.0.2   | State management    |
+| Vite             | 8.2.0   | Build tool          |
 | Bootstrap        | 5.3.8   | CSS framework       |
-| BootstrapVueNext | 0.45.7  | Vue 3 components    |
+| BootstrapVueNext | 0.45.9  | Vue 3 components    |
 | Chart.js         | 4.5.1   | Data visualization  |
-| FontAwesome      | 7.3.0   | Icons               |
+| FontAwesome      | 7.3.1   | Icons               |
 | TypeScript       | 6.0.3   | Type safety         |
-| Vitest           | 4.1.9   | Testing framework   |
-| jsdom            | 29.1.1  | DOM simulation      |
-| ESLint           | 10.6.0  | Code quality        |
+| Vitest           | 4.1.10  | Testing framework   |
+| jsdom            | 30.0.1  | DOM simulation      |
+| ESLint           | 10.8.0  | Code quality        |
 
 ## 🚀 **Getting Started**
 
 ### **Prerequisites**
 
-- Node.js 18+
+- Node.js 22+
 - npm 9+ or yarn 1.22+
 
 ### **Installation**

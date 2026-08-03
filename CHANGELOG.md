@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-08-03 - **Security Patch & Dependency Refresh**
+
+### 🔒 **Security**
+
+Resolved **3 high-severity advisories** (all dev-only / transitive — none ship in the production bundle). `npm audit`: **0 vulnerabilities**.
+
+| Advisory                                                                | Severity | Package           | Fix                                                          |
+| ----------------------------------------------------------------------- | -------- | ----------------- | ------------------------------------------------------------ |
+| [GHSA-r28c-9q8g-f849](https://github.com/advisories/GHSA-r28c-9q8g-f849) | High     | `postcss`         | Path traversal in previous-source-map auto-loading (`sourceMappingURL`) → arbitrary `.map` file disclosure |
+| [GHSA-3jxr-9vmj-r5cp](https://github.com/advisories/GHSA-3jxr-9vmj-r5cp) | High     | `brace-expansion` | DoS via exponential-time expansion of consecutive `{}` groups |
+| [GHSA-v56q-mh7h-f735](https://github.com/advisories/GHSA-v56q-mh7h-f735) | High     | `immutable`       | `List` 32-bit trie overflow → unrecoverable DoS               |
+
+`postcss` moves 8.5.16 → **8.5.25** — this is the alert Dependabot raised. An `overrides` entry now pins it via npm's `$postcss` reference syntax so every transitive consumer (Vite, autoprefixer) resolves to the same patched version.
+
+### ⬆️ **Changed**
+
+- **Pinia 3 → 4** (major). Pinia 4 requires Vue ≥ 3.5.11 and `@vue/devtools-api` ^8, both satisfied. The template uses only `createPinia`, `defineStore` and a `pinia.use()` plugin — all unchanged in v4. Type-check, build and all 8 unit tests pass.
+- **jsdom 29 → 30** (major, test environment only).
+- **Dependencies refreshed**: Vue 3.5.40, Vue Router 5.2.0, Bootstrap-Vue-Next 0.45.9, FontAwesome 7.3.1, Vite 8.2.0, Vitest 4.1.10, `@types/node` 26.1.2, TypeScript-ESLint 8.65.0, ESLint 10.8.0, `eslint-plugin-vue` 10.10.0, Prettier 3.9.6, sass 1.102.0, `vue-tsc` 3.3.9, `lint-staged` 17.3.0, autoprefixer 10.5.4.
+- **`engines.node`** now declared as `>=22`.
+
+### 🚧 **Kept deliberately**
+
+- **TypeScript held at 6.0.3** (latest 7.0.2). TypeScript 7 is the native rewrite and drops the `./lib/tsc` subpath from its package exports; `vue-tsc` 3.3.9 resolves that path directly and fails with `ERR_PACKAGE_PATH_NOT_EXPORTED`. Verified by attempting the upgrade — `npm run type-check` crashes. Revisit once `vue-tsc` ships TS 7 support.
+
+### ✅ **Verification**
+
+- `npm run type-check` (vue-tsc) — clean
+- `npm run build` — clean
+- `npm run test:run` — 8/8 passing
+- `npm audit` — 0 vulnerabilities
+
 ## [2.2.2] - 2026-07-01 - **Security Patch & Dependency Refresh**
 
 ### 🔒 **Security**
